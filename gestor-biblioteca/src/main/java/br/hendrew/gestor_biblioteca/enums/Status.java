@@ -10,9 +10,8 @@ public enum Status implements Description {
     BAIXADO("Baixado");
 
 
-    private String descricao;
-
-    Status(String descricao) {
-        this.descricao = descricao;
+    private String description;
+    Status(String description) {
+        this.description = description;
     }
 }

@@ -16,8 +16,8 @@ public enum CategoriaLivro implements Description {
     MISTÉRIO("Mistério"),
     TERROR("Terror");
 
-    private final String descricao;
-    CategoriaLivro(String descricao) {
-        this.descricao = descricao;
+    private final String description;
+    CategoriaLivro(String description) {
+        this.description = description;
     }
 }
