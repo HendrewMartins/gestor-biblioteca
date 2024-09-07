@@ -1,8 +1,9 @@
 package br.hendrew.gestor_biblioteca.enums;
 
 import br.hendrew.gestor_biblioteca.interfaces.Description;
+import lombok.Getter;
 
-
+@Getter
 public enum Status implements Description {
 
     ATIVO("Ativo"),
@@ -13,10 +14,5 @@ public enum Status implements Description {
 
     Status(String descricao) {
         this.descricao = descricao;
-    }
-
-    @Override
-    public String getDescricao() {
-        return descricao;
     }
 }
