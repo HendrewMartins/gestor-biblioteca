@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class GenericCrudController<T, RS extends GenericCrudService> {
+public abstract class GenericCrudController<T, RS extends GenericCrudService, D> {
 
     @Getter
     @Autowired
     RS service;
 
     @GetMapping
-    public List<T> get() {
+    public List<D> get() {
         return service.findAll();
     }
 
@@ -26,7 +26,7 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService> {
     }
 
     @PostMapping
-    public GenericResponse save(@RequestBody @Valid T genericClass)  {
+    public GenericResponse save(@RequestBody @Valid D genericClass)  {
         return service.save(genericClass);
     }
 
@@ -36,7 +36,7 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService> {
     }
 
     @PutMapping(path = "{id}")
-    public GenericResponse update(@PathVariable(name = "id", required = true) Long id, @RequestBody @Valid T genericClass) throws TratamentoNotFoundException  {
+    public GenericResponse update(@PathVariable(name = "id", required = true) Long id, @RequestBody @Valid D genericClass) throws TratamentoNotFoundException  {
         return service.save(genericClass);
     }
 

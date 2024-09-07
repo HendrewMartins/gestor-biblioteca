@@ -1,6 +1,8 @@
 package br.hendrew.gestor_biblioteca.crud;
 
 import br.hendrew.gestor_biblioteca.exception.NotFoundException;
+import br.hendrew.gestor_biblioteca.utils.DtoToEntityMapper;
+import br.hendrew.gestor_biblioteca.utils.EntityToDtoMapper;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericFormResponse;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import jakarta.persistence.EntityManager;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,52 +30,86 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    EntityToDtoMapper entityToDtoMapper;
+
+    @Autowired
+    DtoToEntityMapper dtoToEntityMapper;
+
+    private Class<D> dtoClass;
+
+    private Class<T> entityClass;
+
+    public GenericCrudService(Class<D> dtoClass, Class<T> entityClass) {
+        this.dtoClass = dtoClass;
+        this.entityClass = entityClass;
+    }
+
     private static final String MESSAGE_NOT_FOUND = "Nenhum registro encontrado.";
     private static final String MESSAGE_SUCCESS = "Registro(s) salvo(s) com sucesso.";
     private static final String MESSAGE_DELETE = "Registro(s) deletado(s) com sucesso.";
 
-    public List<T> findAll() {
-        return repository.findAll();
+    public List<D> findAll() {
+        List<T> list = repository.findAll();
+        return getListDto(list);
     }
 
-    public List<T> findAllWithOrderBy(Sort sorts) {
-        return repository.findAll(sorts);
+    private List<D> getListDto(List<T> list) {
+        List<D> listDto = new ArrayList<>();
+        for(T item : list) {
+            listDto.add(getDto(item));
+        }
+        return listDto;
     }
 
-    public GenericFormResponse<T> findAllGenericForm() {
-        return getGenericFormResponse(findAll());
+    private D getDto(T item) {
+        return entityToDtoMapper.mapEntityToDto(item, dtoClass);
     }
 
-    public GenericFormResponse<T> findAllGenericForm(Sort sorts) {
+    public List<D> findAllWithOrderBy(Sort sorts) {
+        List<T> list = repository.findAll(sorts);
+        return getListDto(list);
+    }
+
+    public GenericFormResponse<D> findAllGenericForm() {
+        List<T> list = repository.findAll();
+        return getGenericFormResponse(getListDto(list));
+    }
+
+    public GenericFormResponse<D> findAllGenericForm(Sort sorts) {
         return getGenericFormResponse(findAllWithOrderBy(sorts));
     }
 
-    public GenericFormResponse<T> getGenericFormResponse(List list) {
+    public GenericFormResponse<D> getGenericFormResponse(List list) {
         if (list.isEmpty())
             throwNotFoundException();
 
-        GenericFormResponse<T> genericFormResponse = new GenericFormResponse<>();
+        GenericFormResponse<D> genericFormResponse = new GenericFormResponse<>();
         genericFormResponse.setLista(list);
 
         return genericFormResponse;
     }
 
-    public GenericResponse saveList(List<T> list) {
+    private T getEntity(D dto) {
+        return dtoToEntityMapper.mapDtoToEntity(dto, entityClass);
+    }
 
-        for (T genericForm : list) {
-            repository.saveAndFlush(genericForm);
+    public GenericResponse saveList(List<D> list) {
+
+        for (D genericForm : list) {
+            repository.saveAndFlush(getEntity(genericForm));
         }
 
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
-    public GenericResponse save(T genericClass) {
-        repository.saveAndFlush(genericClass);
+    public GenericResponse save(D genericClass) {
+        repository.saveAndFlush(getEntity(genericClass));
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
-    public GenericResponse update(T genericClass) {
-        repository.save(genericClass);
+    public GenericResponse update(D genericClass) {
+        repository.save(getEntity(genericClass));
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
@@ -82,6 +119,14 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
             throw new NotFoundException(MESSAGE_NOT_FOUND);
         }
         return optionalEntity.get();
+    }
+
+    public D findDtoById(ID id) {
+        Optional<T> optionalEntity = repository.findById(id);
+        if (!optionalEntity.isPresent()) {
+            throw new NotFoundException(MESSAGE_NOT_FOUND);
+        }
+        return getDto(optionalEntity.get());
     }
 
     public GenericResponse deleteById(ID id) {
