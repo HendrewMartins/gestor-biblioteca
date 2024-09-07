@@ -1,4 +1,4 @@
-package br.hendrew.gestor_biblioteca.utils.generic;
+package br.hendrew.gestor_biblioteca.utils.generic_reponse;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;

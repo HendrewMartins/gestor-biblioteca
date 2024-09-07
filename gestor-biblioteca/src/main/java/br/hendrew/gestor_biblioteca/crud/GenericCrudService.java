@@ -1,16 +1,14 @@
 package br.hendrew.gestor_biblioteca.crud;
 
 import br.hendrew.gestor_biblioteca.exception.NotFoundException;
-import br.hendrew.gestor_biblioteca.utils.generic.GenericFormResponse;
-import br.hendrew.gestor_biblioteca.utils.generic.GenericResponse;
+import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericFormResponse;
+import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;

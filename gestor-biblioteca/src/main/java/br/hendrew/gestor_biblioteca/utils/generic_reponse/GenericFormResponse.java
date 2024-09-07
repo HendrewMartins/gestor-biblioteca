@@ -1,4 +1,4 @@
-package br.hendrew.gestor_biblioteca.utils.generic;
+package br.hendrew.gestor_biblioteca.utils.generic_reponse;
 
 import lombok.Getter;
 import lombok.Setter;
