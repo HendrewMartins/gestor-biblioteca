@@ -22,7 +22,7 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D>
 
     @GetMapping(path= "{id}")
     public Object getById(@PathVariable(name = "id", required = true) Long id) throws TratamentoNotFoundException  {
-        return service.findById(id);
+        return service.findDtoById(id);
     }
 
     @PostMapping

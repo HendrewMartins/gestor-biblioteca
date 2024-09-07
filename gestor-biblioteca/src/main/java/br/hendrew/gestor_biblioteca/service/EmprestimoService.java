@@ -9,4 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, EmprestimoRepository, EmprestimoDto> {
 
+    public EmprestimoService() {
+        super(EmprestimoDto.class,Emprestimo.class);
+    }
+
 }

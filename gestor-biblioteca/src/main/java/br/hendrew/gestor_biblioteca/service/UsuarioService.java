@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService extends GenericCrudService<Usuario, Integer, UsuarioRepository, UsuarioDto> {
+
+    public UsuarioService() {
+        super(UsuarioDto.class, Usuario.class);
+    }
 }
