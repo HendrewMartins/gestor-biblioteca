@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: gestor-biblioteca
+  datasource:
+    url: jdbc:postgresql://localhost:5433/gestorbiblioteca?ApplicationName=gestor_biblioteca&currentSchema=public
+    username: postgres
+    password: ${PASSWORD}
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+      javax:
+        persistence:
+          validation:
+            mode: none
