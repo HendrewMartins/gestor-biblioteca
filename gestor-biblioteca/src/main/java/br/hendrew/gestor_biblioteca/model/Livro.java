@@ -1,5 +1,6 @@
 package br.hendrew.gestor_biblioteca.model;
 
+import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,6 +47,6 @@ public class Livro implements Serializable {
 
     @NotNull
     @Column(name = "categoria")
-    @Size(max = 30)
-    private String categoria;
+    @Enumerated(EnumType.ORDINAL)
+    private CategoriaLivro categoria;
 }
