@@ -15,22 +15,11 @@ import java.time.LocalDate;
 public class CenarioEmprestimo {
 
     public static Usuario usuario() {
-        Usuario usuario = new Usuario();
-        usuario.setNome("Nome do Usuário");
-        usuario.setEmail("usuario@example.com");
-        usuario.setDataCadastro(LocalDate.now());
-        usuario.setTelefone("1234567890");
-        return usuario;
+        return CenarioUsuario.usuario();
     }
 
     public static Livro livro() {
-        Livro livro = new Livro();
-        livro.setTitulo("Título do Livro");
-        livro.setAutor("Autor do Livro");
-        livro.setIsbn("1234567890");
-        livro.setDataPublicacao(LocalDate.now().minusDays(1));
-        livro.setCategoria(CategoriaLivro.FICCAO);
-        return livro;
+        return CenarioLivro.livro();
     }
 
     public static EmprestimoDto getEmprestimoDto(Integer livroId, Integer usuarioId) {
