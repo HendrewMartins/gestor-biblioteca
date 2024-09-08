@@ -149,4 +149,9 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
     public void throwNotFoundException(String message) {
         throw new NotFoundException(message);
     }
+
+    public GenericResponse saveEntity(T genericClass) {
+        repository.saveAndFlush(genericClass);
+        return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
+    }
 }
