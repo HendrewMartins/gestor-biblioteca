@@ -1,0 +1,47 @@
+<form [formGroup]="form" #fr="ngForm">
+    <app-crud [form]="form" titulo="Bimestre" [api]="service">
+        <div class="form-group">
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="titulo">
+                    <mat-error *ngIf="titulo?.errors">{{ titulo.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Autor</mat-label>
+                    <input matInput formControlName="autor">
+                    <mat-error *ngIf="autor?.errors">{{ autor.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>ISBN</mat-label>
+                    <input matInput type="number" formControlName="isbn">
+                    <mat-error *ngIf="isbn?.errors">{{ isbn.errors | erro }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Data publicação</mat-label>
+                    <input matInput type="date" formControlName="dataPublicacao">
+                    <mat-error *ngIf="dataPublicacao?.errors">{{ dataPublicacao.errors | erro }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="categoria">
+                      <mat-option *ngFor="let categoria of categorias" [value]="categoria.value">
+                        {{ categoria.label }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="categoria.invalid">{{ categoria.errors | erro }}</mat-error>
+                  </mat-form-field>
+            </div>
+
+        </div>
+
+    </app-crud>
+</form>

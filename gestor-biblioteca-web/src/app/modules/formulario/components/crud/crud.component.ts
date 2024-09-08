@@ -55,7 +55,7 @@ export class CrudComponent implements OnInit, OnDestroy {
                 }
             }, error => {
                 console.error(error);
-                alert('Não foi possível encontrar  o registro ' + id);
+                alert('Não foi possível encontrar o registro ' + id);
                 this.abrirNovoRegistro();
             });
         }
@@ -77,7 +77,7 @@ export class CrudComponent implements OnInit, OnDestroy {
         this.api.alterar(value, this.registroId).subscribe(registro => {
             if (registro) {
                 this.form.patchValue(registro);
-                alert(`Registro ${this.registroId} foi salvo com sucesso`);
+                alert(`Registro foi salvo com sucesso`);
             }
         }, error => {
             console.error(error);
@@ -87,7 +87,7 @@ export class CrudComponent implements OnInit, OnDestroy {
 
     private criar() {
         this.api.criar(this.form.value).subscribe((registro) => {
-            alert(`O registro com código ${registro.id} foi salvo com sucesso!`);
+            alert(`O registro com código foi salvo com sucesso!`);
             this.limpar();
 
         }, error => {

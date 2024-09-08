@@ -8,6 +8,7 @@ export const routes: Routes = [
 
         children: [
             { path: 'usuario', loadChildren: () => import('./modules/cadastro/usuario/usuario.module').then(m => m.UsuarioModule) },
+            { path: 'livro', loadChildren: () => import('./modules/cadastro/livro/livro.module').then(m => m.LivroModule) },
         ]
     }
 ];
