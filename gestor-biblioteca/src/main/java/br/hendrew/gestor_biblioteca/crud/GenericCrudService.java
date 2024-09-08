@@ -31,6 +31,7 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
     @Autowired
     EntityManager entityManager;
 
+    @Getter
     @Autowired
     EntityToDtoMapper entityToDtoMapper;
 
