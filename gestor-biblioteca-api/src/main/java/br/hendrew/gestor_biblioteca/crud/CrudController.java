@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class GenericCrudController<T, RS extends GenericCrudService, D extends Validatable> {
+public abstract class CrudController<T, RS extends CrudService, D extends Validatable> {
 
     @Getter
     @Autowired

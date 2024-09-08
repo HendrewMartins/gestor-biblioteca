@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class GenericCrudService<T, ID, R extends JpaRepository<T, ID>, D extends Validatable> {
+public abstract class CrudService<T, ID, R extends JpaRepository<T, ID>, D extends Validatable> {
 
     @Getter
     @Autowired
@@ -40,7 +40,7 @@ public abstract class GenericCrudService<T, ID, R extends JpaRepository<T, ID>, 
 
     private Class<T> entityClass;
 
-    public GenericCrudService(Class<D> dtoClass, Class<T> entityClass) {
+    public CrudService(Class<D> dtoClass, Class<T> entityClass) {
         this.dtoClass = dtoClass;
         this.entityClass = entityClass;
     }

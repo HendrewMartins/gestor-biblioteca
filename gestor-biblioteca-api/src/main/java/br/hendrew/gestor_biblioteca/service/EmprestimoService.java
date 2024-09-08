@@ -1,6 +1,6 @@
 package br.hendrew.gestor_biblioteca.service;
 
-import br.hendrew.gestor_biblioteca.crud.GenericCrudService;
+import br.hendrew.gestor_biblioteca.crud.CrudService;
 import br.hendrew.gestor_biblioteca.dtos.CategoriaDto;
 import br.hendrew.gestor_biblioteca.dtos.EmprestimoDto;
 import br.hendrew.gestor_biblioteca.dtos.LivroDto;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, EmprestimoRepository, EmprestimoDto> {
+public class EmprestimoService extends CrudService<Emprestimo, Integer, EmprestimoRepository, EmprestimoDto> {
 
 
     public EmprestimoService() {

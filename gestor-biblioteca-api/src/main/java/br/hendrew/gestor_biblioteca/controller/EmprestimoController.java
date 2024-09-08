@@ -1,6 +1,6 @@
 package br.hendrew.gestor_biblioteca.controller;
 
-import br.hendrew.gestor_biblioteca.crud.GenericCrudController;
+import br.hendrew.gestor_biblioteca.crud.CrudController;
 import br.hendrew.gestor_biblioteca.dtos.EmprestimoDto;
 import br.hendrew.gestor_biblioteca.dtos.LivroDto;
 import br.hendrew.gestor_biblioteca.model.Emprestimo;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/v1/emprestimo")
-public class EmprestimoController extends GenericCrudController<Emprestimo, EmprestimoService, EmprestimoDto> {
+public class EmprestimoController extends CrudController<Emprestimo, EmprestimoService, EmprestimoDto> {
 
     @GetMapping(path = "/recomendacao/{id}")
     public List<LivroDto> getRecomendacao(@PathVariable(name = "id", required = true) Integer usuarioId) throws Exception {
