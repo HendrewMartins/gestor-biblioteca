@@ -21,7 +21,7 @@ public class UsuarioDto implements EntityDto {
 
     private Integer id;
     @NotNull
-    private String descricao;
+    private String nome;
     @NotNull
     private String email;
     @NotNull

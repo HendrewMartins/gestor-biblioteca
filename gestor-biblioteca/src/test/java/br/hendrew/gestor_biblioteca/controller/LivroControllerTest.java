@@ -1,10 +1,8 @@
 package br.hendrew.gestor_biblioteca.controller;
 
-import br.hendrew.gestor_biblioteca.dtos.EmprestimoDto;
 import br.hendrew.gestor_biblioteca.dtos.LivroDto;
-import br.hendrew.gestor_biblioteca.dtos.UsuarioDto;
-import br.hendrew.gestor_biblioteca.enums.Status;
-import br.hendrew.gestor_biblioteca.service.EmprestimoService;
+import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
+import br.hendrew.gestor_biblioteca.service.LivroService;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -24,87 +22,76 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(EmprestimoController.class)
-public class EmprestimoControllerTest {
+@WebMvcTest(LivroController.class)
+public class LivroControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    EmprestimoService emprestimoService;
+    LivroService livroService;
 
     @Test
-    void testGetAllEmprestimos() throws Exception {
-        List<EmprestimoDto> emprestimos = Arrays.asList(new EmprestimoDto(1), new EmprestimoDto(2));
+    void testGetAllLivro() throws Exception {
+        List<LivroDto> livros = Arrays.asList(new LivroDto(1), new LivroDto(2));
 
-        when(emprestimoService.findAll()).thenReturn(emprestimos);
+        when(livroService.findAll()).thenReturn(livros);
 
-        mockMvc.perform(get("/api/v1/emprestimo"))
+        mockMvc.perform(get("/api/v1/livro"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"id\":1},{\"id\":2}]"));
     }
 
     @Test
-    void testGetEmprestimoById() throws Exception {
-        EmprestimoDto emprestimo = new EmprestimoDto(1);
+    void testGetLivroById() throws Exception {
+        LivroDto livro = new LivroDto(1);
 
-        when(emprestimoService.findDtoById(anyInt())).thenReturn(emprestimo);
+        when(livroService.findDtoById(anyInt())).thenReturn(livro);
 
-        mockMvc.perform(get("/api/v1/emprestimo/1"))
+        mockMvc.perform(get("/api/v1/livro/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":1}"));
     }
 
     @Test
-    void testGetRecomendacao() throws Exception {
-        List<LivroDto> recomendacoes = Arrays.asList(new LivroDto(1, "Livro 1"), new LivroDto(2, "Livro 2"));
-
-        when(emprestimoService.recomendacao(anyInt())).thenReturn(recomendacoes);
-
-        mockMvc.perform(get("/api/v1/emprestimo/recomendacao/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("[{\"titulo\":\"Livro 1\"},{\"titulo\":\"Livro 2\"}]"));
-    }
-
-    @Test
-    void testSaveEmprestimo() throws Exception {
-        EmprestimoDto emprestimoDto = getEmprestimoDto();
+    void testSaveLivro() throws Exception {
+        LivroDto livroDto = getLivroDto();
         GenericResponse response = new GenericResponse("Registro(s) salvo(s) com sucesso.", HttpStatus.OK.value());
-        when(emprestimoService.save(any())).thenReturn(response);
-        mockMvc.perform(post("/api/v1/emprestimo")
+        when(livroService.save(any())).thenReturn(response);
+        mockMvc.perform(post("/api/v1/livro")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(emprestimoDto)))
+                        .content(asJsonString(livroDto)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"message\":\"Registro(s) salvo(s) com sucesso.\"}"))
                 .andExpect(content().json("{\"status\":200}"));
     }
 
     @Test
-    void testDeleteEmprestimo() throws Exception {
+    void testDeleteLivro() throws Exception {
         GenericResponse response = new GenericResponse("Registro(s) deletado(s) com sucesso.", HttpStatus.OK.value());
 
-        when(emprestimoService.deleteById(anyInt())).thenReturn(response);
+        when(livroService.deleteById(anyInt())).thenReturn(response);
 
-        mockMvc.perform(delete("/api/v1/emprestimo/1"))
+        mockMvc.perform(delete("/api/v1/livro/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"message\":\"Registro(s) deletado(s) com sucesso.\"}"))
                 .andExpect(content().json("{\"status\":200}"));
     }
 
     @Test
-    void testUpdateEmprestimo() throws Exception {
-        EmprestimoDto emprestimoDto = getEmprestimoDto();
-        emprestimoDto.setStatus(Status.BAIXADO);
-        emprestimoDto.setDataDevolucao(LocalDate.of(2024,9,8));
+    void testUpdateLivro() throws Exception {
+        LivroDto livroDto = getLivroDto();
+        livroDto.setAutor("UPDATE");
         GenericResponse response = new GenericResponse("Registro(s) salvo(s) com sucesso.", HttpStatus.OK.value());
-        when(emprestimoService.update(any(EmprestimoDto.class), anyInt())).thenReturn(response);
+        when(livroService.update(any(LivroDto.class), anyInt())).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/emprestimo/1")
+        mockMvc.perform(put("/api/v1/livro/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(emprestimoDto)))
+                        .content(asJsonString(livroDto)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"message\":\"Registro(s) salvo(s) com sucesso.\"}"))
                 .andExpect(content().json("{\"status\":200}"));
@@ -120,14 +107,14 @@ public class EmprestimoControllerTest {
         }
     }
 
-    private EmprestimoDto getEmprestimoDto() {
-        EmprestimoDto emprestimoDto = new EmprestimoDto();
-        emprestimoDto.setId(1);
-        emprestimoDto.setDataEmprestimo(LocalDate.parse("2024-09-07"));
-        emprestimoDto.setStatus(Status.ATIVO);
-        emprestimoDto.setLivro(new LivroDto(1));
-        emprestimoDto.setUsuario(new UsuarioDto(1));
-        return emprestimoDto;
+    private LivroDto getLivroDto() {
+        LivroDto livroDto = new LivroDto();
+        livroDto.setId(1);
+        livroDto.setTitulo("Insert");
+        livroDto.setAutor("Autor livro");
+        livroDto.setIsbn("987654321");
+        livroDto.setCategoria(CategoriaLivro.AUTOAJUDA);
+        livroDto.setDataPublicacao(LocalDate.parse("2024-09-07"));
+        return livroDto;
     }
-
 }

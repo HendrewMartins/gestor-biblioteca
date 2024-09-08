@@ -26,9 +26,9 @@ public class Usuario implements Serializable {
     private Integer id;
 
     @NotNull
-    @Column(name = "descricao")
+    @Column(name = "nome")
     @Size(max = 100)
-    private String descricao;
+    private String nome;
 
     @NotNull
     @Column(name = "email")
