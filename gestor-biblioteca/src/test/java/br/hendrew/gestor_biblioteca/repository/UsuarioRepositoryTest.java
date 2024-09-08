@@ -1,20 +1,15 @@
 package br.hendrew.gestor_biblioteca.repository;
 
 import br.hendrew.gestor_biblioteca.cenarios.CenarioUsuario;
-import br.hendrew.gestor_biblioteca.dtos.UsuarioDto;
-import br.hendrew.gestor_biblioteca.exception.NotFoundException;
-import br.hendrew.gestor_biblioteca.exception.ValidationException;
 import br.hendrew.gestor_biblioteca.model.Usuario;
-import br.hendrew.gestor_biblioteca.service.UsuarioService;
-import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,10 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsuarioRepositoryTest {
 
     @Autowired
-    UsuarioService usuarioService;
-
-    @Autowired
     UsuarioRepository usuarioRepository;
+
 
     @Transactional
     void deleteCenario() {
@@ -34,104 +27,52 @@ public class UsuarioRepositoryTest {
     }
 
     @Test
-    void testSaveUsuario_validData() {
-        UsuarioDto dto = CenarioUsuario.usuarioDto();
-        GenericResponse response = usuarioService.save(dto);
-        assertNotNull(response);
-        assertEquals("Registro(s) salvo(s) com sucesso.", response.getMessage());
+    void testSave_valid() {
+        Usuario usuario = CenarioUsuario.usuario();
+        usuarioRepository.saveAndFlush(usuario);
+        assertNotNull(usuario.getId());
         this.deleteCenario();
-    }
-
-    @Test
-    void testValidateUsuarioDto_validData() {
-        UsuarioDto dto = new UsuarioDto();
-        dto.setDataCadastro(LocalDate.now());
-        dto.setEmail("email@email.com.br");
-        assertDoesNotThrow(dto::validate);
-    }
-
-    @Test
-    void testValidateUsuarioDto_invalidDataUsuario() {
-        UsuarioDto dto = new UsuarioDto();
-        dto.setDataCadastro(LocalDate.now().plusDays(1));
-        ValidationException exception = assertThrows(ValidationException.class, dto::validate);
-        assertEquals("Data de cadastro não pode ser maior que a data atual!", exception.getMessage());
-    }
-
-    @Test
-    void testValidateUsuarioDto_validEmail() {
-        UsuarioDto dto = new UsuarioDto();
-        dto.setEmail("email@email.com.br");
-        assertDoesNotThrow(dto::validate);
-    }
-
-    @Test
-    void testValidateUsuarioDto_invalidEmail() {
-        UsuarioDto dto = new UsuarioDto();
-        dto.setEmail("email.com.br");
-        ValidationException exception = assertThrows(ValidationException.class, dto::validate);
-        assertEquals("E-mail inválido: " + dto.getEmail() + "!", exception.getMessage());
     }
 
     @Test
     void testFindById_found() {
         Usuario usuario = CenarioUsuario.usuario();
-        usuarioRepository.save(usuario);
-        Usuario result = usuarioService.findById(usuario.getId());
+        usuarioRepository.saveAndFlush(usuario);
+        Optional<Usuario> result = usuarioRepository.findById(usuario.getId());
         assertNotNull(result);
+        assertTrue(result.isPresent());
         this.deleteCenario();
     }
 
     @Test
     void testFindById_notFound() {
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-            usuarioService.findById(999);
-        });
-        assertEquals("404 NOT_FOUND \"Nenhum registro encontrado.\"", exception.getMessage());
+        Optional<Usuario> optional = usuarioRepository.findById(999);
+        assertFalse(optional.isPresent());
     }
 
     @Test
     void testFindAll() {
-        UsuarioDto dto1 = CenarioUsuario.usuarioDto();
-        usuarioService.save(dto1);
+        Usuario dto1 = CenarioUsuario.usuario();
+        usuarioRepository.saveAndFlush(dto1);
 
-        UsuarioDto dto2 = CenarioUsuario.usuarioDto();
-        usuarioService.save(dto2);
-        List<UsuarioDto> result = usuarioService.findAll();
+        Usuario dto2 = CenarioUsuario.usuario();
+        usuarioRepository.saveAndFlush(dto2);
+        List<Usuario> result = usuarioRepository.findAll();
         assertNotNull(result);
         assertEquals(2, result.size());
         this.deleteCenario();
     }
 
     @Test
-    void testFindDtoById_found() {
-        Usuario usuario = CenarioUsuario.usuario();
-        usuarioRepository.save(usuario);
-        UsuarioDto result = usuarioService.findDtoById(usuario.getId());
-        assertNotNull(result);
-        this.deleteCenario();
-    }
-
-    @Test
-    void testFindDtoById_notFound() {
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-            usuarioService.findDtoById(999);
-        });
-
-        assertEquals("404 NOT_FOUND \"Nenhum registro encontrado.\"", exception.getMessage());
-    }
-
-    @Test
     void testUpdate() {
         Usuario usuario = CenarioUsuario.usuario();
+        usuarioRepository.saveAndFlush(usuario);
+        usuario.setNome("Nome update");
         usuarioRepository.save(usuario);
-        UsuarioDto dto = CenarioUsuario.usuarioDto();
-        dto.setId(usuario.getId());
-        dto.setNome("Nome Update");
-        GenericResponse response = usuarioService.update(dto, dto.getId());
-
-        assertNotNull(response);
-        assertEquals("Registro(s) salvo(s) com sucesso.", response.getMessage());
+        Optional<Usuario> result = usuarioRepository.findById(usuario.getId());
+        assertNotNull(result);
+        assertTrue(result.isPresent());
+        assertEquals("Nome update", result.get().getNome());
         this.deleteCenario();
     }
 
@@ -139,19 +80,9 @@ public class UsuarioRepositoryTest {
     void testDeleteById_found() {
         Usuario usuario = CenarioUsuario.usuario();
         usuarioRepository.save(usuario);
-        GenericResponse response = usuarioService.deleteById(usuario.getId());
-
-        assertNotNull(response);
-        assertEquals("Registro(s) deletado(s) com sucesso.", response.getMessage());
+        assertTrue(usuarioRepository.findById(usuario.getId()).isPresent());
+        usuarioRepository.deleteById(usuario.getId());
+        assertFalse(usuarioRepository.findById(usuario.getId()).isPresent());
         this.deleteCenario();
-    }
-
-    @Test
-    void testDeleteById_notFound() {
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-            usuarioService.deleteById(999);
-        });
-
-        assertEquals("404 NOT_FOUND \"Nenhum registro encontrado.\"", exception.getMessage());
     }
 }
