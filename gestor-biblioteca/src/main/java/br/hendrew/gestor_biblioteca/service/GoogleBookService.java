@@ -2,6 +2,9 @@ package br.hendrew.gestor_biblioteca.service;
 
 import br.hendrew.gestor_biblioteca.dtos.google_books.Book;
 import br.hendrew.gestor_biblioteca.dtos.google_books.Response;
+import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
+import br.hendrew.gestor_biblioteca.model.Livro;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,6 +12,9 @@ import java.util.List;
 
 @Service
 public class GoogleBookService {
+
+    @Autowired
+    LivroService livroService;
 
     private final String GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
@@ -19,12 +25,33 @@ public class GoogleBookService {
                 .map(item -> {
                     Book book = new Book();
                     book.setTitle(item.getVolumeInfo().getTitle());
-                    book.setAuthors(String.join(", ", item.getVolumeInfo().getAuthors()));
+                    if (item.getVolumeInfo().getAuthors() != null) {
+                        book.setAuthors(String.join(", ", item.getVolumeInfo().getAuthors()));
+                    }
                     book.setDescription(item.getVolumeInfo().getDescription());
                     book.setPublishedDate(item.getVolumeInfo().getPublishedDate());
+                    if (item.getVolumeInfo().getCategories() != null && !item.getVolumeInfo().getCategories().isEmpty()) {
+                        book.setCategory(item.getVolumeInfo().getCategories().get(0));
+                    }
+
+                    item.getVolumeInfo().getIndustryIdentifiers().stream()
+                            .filter(identifier -> "ISBN_13".equals(identifier.getType()))
+                            .findFirst()
+                            .ifPresent(identifier -> book.setIsbn(identifier.getIdentifier()));
+
                     return book;
                 })
                 .toList();
+    }
+
+    public void addLivroByBook(Book book) {
+        Livro livro = new Livro();
+        livro.setAutor(book.getAuthors());
+        livro.setIsbn(book.getIsbn());
+        livro.setTitulo(book.getTitle());
+        livro.setDataPublicacao(book.getPublishedDate());
+        livro.setCategoria(CategoriaLivro.fromCategoria(book.getCategory()));
+        livroService.saveEntity(livro);
     }
 
 }

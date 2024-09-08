@@ -5,19 +5,30 @@ import lombok.Getter;
 
 @Getter
 public enum CategoriaLivro implements Description {
-    ROMANCE("Romance"),
-    FICCAO("Ficção"),
-    NAO_FICCAO("Não-ficção"),
-    FANTASIA("Fantasia"),
-    CIENTIFICO("Científico"),
-    BIOGRAFIA("Biografia"),
-    HISTORIA("História"),
-    AUTOAJUDA("Autoajuda"),
-    MISTÉRIO("Mistério"),
-    TERROR("Terror");
+    ROMANCE("Romance", "Romance"),
+    FICCAO("Ficção", "Fiction"),
+    NAO_FICCAO("Não-ficção", "Non-fiction"),
+    FANTASIA("Fantasia", "Fantasy"),
+    CIENTIFICO("Científico", "Science"),
+    BIOGRAFIA("Biografia", "Biography"),
+    HISTORIA("História", "History"),
+    AUTOAJUDA("Autoajuda", "Self-help"),
+    MISTERIO("Mistério", "Mystery"),
+    TERROR("Terror", "Horror");
 
     private final String description;
-    CategoriaLivro(String description) {
+    private final String descriptionEn;
+    CategoriaLivro(String description, String descriptionEn) {
         this.description = description;
+        this.descriptionEn = descriptionEn;
+    }
+
+    public static CategoriaLivro fromCategoria(String descricaoEn) {
+        for (CategoriaLivro categoria : CategoriaLivro.values()) {
+            if (categoria.getDescriptionEn().equalsIgnoreCase(descricaoEn)) {
+                return categoria;
+            }
+        }
+        throw new IllegalArgumentException("Categoria não encontrada para: " + descricaoEn);
     }
 }
