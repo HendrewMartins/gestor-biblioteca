@@ -1,6 +1,6 @@
 package br.hendrew.gestor_biblioteca.utils;
 
-import br.hendrew.gestor_biblioteca.annotation.QueryToDto;
+import br.hendrew.gestor_biblioteca.annotation.QueryDtoMapper;
 import br.hendrew.gestor_biblioteca.annotation.TransientDTO;
 import br.hendrew.gestor_biblioteca.utils.translate.ReflectionUtil;
 import jakarta.persistence.EnumType;
@@ -10,9 +10,7 @@ import jakarta.persistence.Tuple;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.type.StandardBasicTypes;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,10 +19,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class TupleUtil<T> {
+public class TupleFactory<T> {
 
     private Field[] getFieldsToDto(Class<T> clazz) {
-        QueryToDto queryToDTO = clazz.getAnnotation(QueryToDto.class);
+        QueryDtoMapper queryToDTO = clazz.getAnnotation(QueryDtoMapper.class);
         if (queryToDTO != null && queryToDTO.includeSuperClasses()) {
             return ReflectionUtil.getAllFieldsIncludeSuperClasses(clazz).toArray(new Field[0]);
         }
@@ -112,28 +110,6 @@ public class TupleUtil<T> {
             }
         }
         return null;
-    }
-
-    public List<T> toDTOFromConstructor(NativeQuery query, Class<T> clazz) throws InstantiationException, IllegalAccessException, InvocationTargetException {
-        if (clazz.getDeclaredConstructors().length == 0) {
-            return new ArrayList<>();
-        }
-        for (Field field : clazz.getDeclaredFields()) {
-            if (!isTransient(field)) {
-                handleEnumeratedField(query, field, new HashMap<>());
-            }
-        }
-
-        List<T> list = new ArrayList<>();
-        List<Tuple> resultList = query.getResultList();
-        Constructor<?> constructor = clazz.getDeclaredConstructors()[0];
-
-        for (Tuple tuple : resultList) {
-            T instance = (T) constructor.newInstance(tuple);
-            list.add(instance);
-        }
-
-        return list;
     }
 
     private void montarQueryScalar(Field field, NativeQuery query) {

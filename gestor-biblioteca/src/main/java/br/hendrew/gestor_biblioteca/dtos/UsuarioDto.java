@@ -29,6 +29,10 @@ public class UsuarioDto implements EntityDto {
     @NotNull
     private String telefone;
 
+    public UsuarioDto(Integer id){
+        this.id = id;
+    }
+
     @Override
     public void validate() {
         if (ValidatorUtil.isDataValida(dataCadastro))

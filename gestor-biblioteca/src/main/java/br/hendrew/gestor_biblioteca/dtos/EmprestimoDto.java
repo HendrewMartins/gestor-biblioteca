@@ -30,6 +30,10 @@ public class EmprestimoDto implements EntityDto {
     @NotNull
     private Status status;
 
+    public EmprestimoDto(Integer id){
+        this.id = id;
+    }
+
     @Override
     public void validate() {
         if (ValidatorUtil.isDataValida(dataEmprestimo))

@@ -23,7 +23,7 @@ public class QueryDto<E> {
     }
 
     public List<E> getResultList() throws Exception {
-        TupleUtil<E> util = new TupleUtil<>();
+        TupleFactory<E> util = new TupleFactory<>();
         return util.toDTO(this.query, this.dtoClass);
     }
 
@@ -32,7 +32,7 @@ public class QueryDto<E> {
     }
 
     public E getSingleResult() throws Exception {
-        TupleUtil<E> util = new TupleUtil<>();
+        TupleFactory<E> util = new TupleFactory<>();
         List<E> list = util.toDTO(this.query, this.dtoClass);
         if (list.isEmpty()){
             return null;

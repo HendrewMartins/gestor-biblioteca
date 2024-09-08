@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
@@ -68,41 +67,8 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
         return entityToDtoMapper.mapEntityToDto(item, dtoClass);
     }
 
-    public List<D> findAllWithOrderBy(Sort sorts) {
-        List<T> list = repository.findAll(sorts);
-        return getListDto(list);
-    }
-
-    public GenericFormResponse<D> findAllGenericForm() {
-        List<T> list = repository.findAll();
-        return getGenericFormResponse(getListDto(list));
-    }
-
-    public GenericFormResponse<D> findAllGenericForm(Sort sorts) {
-        return getGenericFormResponse(findAllWithOrderBy(sorts));
-    }
-
-    public GenericFormResponse<D> getGenericFormResponse(List list) {
-        if (list.isEmpty())
-            throwNotFoundException();
-
-        GenericFormResponse<D> genericFormResponse = new GenericFormResponse<>();
-        genericFormResponse.setLista(list);
-
-        return genericFormResponse;
-    }
-
     private T getEntity(D dto) {
         return dtoToEntityMapper.mapDtoToEntity(dto, entityClass);
-    }
-
-    public GenericResponse saveList(List<D> list) {
-
-        for (D genericForm : list) {
-            repository.saveAndFlush(getEntity(genericForm));
-        }
-
-        return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
     public GenericResponse save(D genericClass) {
@@ -144,10 +110,6 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
 
     public void throwNotFoundException() {
         throw new NotFoundException(MESSAGE_NOT_FOUND);
-    }
-
-    public void throwNotFoundException(String message) {
-        throw new NotFoundException(message);
     }
 
     public GenericResponse saveEntity(T genericClass) {
