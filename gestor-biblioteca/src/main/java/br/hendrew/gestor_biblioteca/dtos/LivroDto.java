@@ -1,5 +1,6 @@
 package br.hendrew.gestor_biblioteca.dtos;
 
+import br.hendrew.gestor_biblioteca.annotation.ManyDto;
 import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
 import br.hendrew.gestor_biblioteca.interfaces.EntityDto;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ManyDto
 public class LivroDto implements EntityDto {
 
     private Integer id;

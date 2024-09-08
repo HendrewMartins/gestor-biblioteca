@@ -3,6 +3,7 @@ package br.hendrew.gestor_biblioteca.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -65,7 +66,7 @@ public class EntityToDtoMapper {
                     }
                 }
                 dtoField.set(dto, dtoCollection);
-            } else if (entityField.getType().isAnnotationPresent(Embeddable.class)) {
+            } else if (entityField.getType().isAnnotationPresent(Embeddable.class) || entityField.getType().isAnnotationPresent(Entity.class)) {
                 dtoField.set(dto, mapEntityToDto(entityField.get(entity), dtoField.getType()));
             } else if (entityField.getType().equals(dtoField.getType())) {
                 dtoField.set(dto, entityField.get(entity));

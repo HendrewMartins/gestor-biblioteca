@@ -27,12 +27,12 @@ public class Emprestimo implements Serializable {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "livroId")
+    @JoinColumn(name = "livroId", updatable = false)
     private Livro livro;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuarioId")
+    @JoinColumn(name = "usuarioId", updatable = false)
     private Usuario usuario;
 
     @NotNull

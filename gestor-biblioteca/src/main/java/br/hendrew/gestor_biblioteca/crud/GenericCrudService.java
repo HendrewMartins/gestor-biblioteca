@@ -110,7 +110,7 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
-    public GenericResponse update(D genericClass) {
+    public GenericResponse update(D genericClass, Integer id) {
         genericClass.validate();
         repository.save(getEntity(genericClass));
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());

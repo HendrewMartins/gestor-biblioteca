@@ -22,7 +22,7 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D 
     }
 
     @GetMapping(path= "{id}")
-    public Object getById(@PathVariable(name = "id", required = true) Long id) throws TratamentoNotFoundException  {
+    public Object getById(@PathVariable(name = "id", required = true) Integer id) throws TratamentoNotFoundException  {
         return service.findDtoById(id);
     }
 
@@ -32,13 +32,13 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D 
     }
 
     @DeleteMapping(path = "{id}")
-    public GenericResponse deleteById(@PathVariable(name = "id", required = true) Long id) throws TratamentoNotFoundException {
+    public GenericResponse deleteById(@PathVariable(name = "id", required = true) Integer id) throws TratamentoNotFoundException {
         return service.deleteById(id);
     }
 
     @PutMapping(path = "{id}")
-    public GenericResponse update(@PathVariable(name = "id", required = true) Long id, @RequestBody @Valid D genericClass) throws TratamentoNotFoundException  {
-        return service.save(genericClass);
+    public GenericResponse update(@PathVariable(name = "id", required = true) Integer id, @RequestBody @Valid D genericClass) throws TratamentoNotFoundException  {
+        return service.update(genericClass, id);
     }
 
 }

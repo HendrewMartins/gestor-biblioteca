@@ -1,5 +1,6 @@
 package br.hendrew.gestor_biblioteca.dtos;
 
+import br.hendrew.gestor_biblioteca.annotation.ManyDto;
 import br.hendrew.gestor_biblioteca.exception.ValidationException;
 import br.hendrew.gestor_biblioteca.interfaces.EntityDto;
 import br.hendrew.gestor_biblioteca.utils.ValidatorUtil;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ManyDto
 public class UsuarioDto implements EntityDto {
 
     private Integer id;

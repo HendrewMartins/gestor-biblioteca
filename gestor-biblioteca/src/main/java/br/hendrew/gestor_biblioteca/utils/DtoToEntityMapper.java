@@ -1,6 +1,7 @@
 package br.hendrew.gestor_biblioteca.utils;
 
-import jakarta.persistence.Embeddable;
+import br.hendrew.gestor_biblioteca.annotation.EmbeddableDto;
+import br.hendrew.gestor_biblioteca.annotation.ManyDto;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -61,7 +62,7 @@ public class DtoToEntityMapper {
                     }
                 }
                 entityField.set(entity, entityCollection);
-            } else if (entityField.getType().isAnnotationPresent(Embeddable.class)) {
+            } else if (dtoField.getType().isAnnotationPresent(EmbeddableDto.class) || dtoField.getType().isAnnotationPresent(ManyDto.class)) {
                 entityField.set(entity, mapDtoToEntity(dtoField.get(dto), entityField.getType()));
             } else if (dtoField.getType().equals(entityField.getType())) {
                 entityField.set(entity, dtoField.get(dto));

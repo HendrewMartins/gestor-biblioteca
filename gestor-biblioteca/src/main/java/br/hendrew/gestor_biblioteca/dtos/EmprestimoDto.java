@@ -1,8 +1,8 @@
 package br.hendrew.gestor_biblioteca.dtos;
 
+import br.hendrew.gestor_biblioteca.annotation.ManyDto;
 import br.hendrew.gestor_biblioteca.enums.Status;
 import br.hendrew.gestor_biblioteca.interfaces.EntityDto;
-import br.hendrew.gestor_biblioteca.interfaces.Validatable;
 import br.hendrew.gestor_biblioteca.utils.ValidatorUtil;
 import jakarta.validation.ValidationException;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
