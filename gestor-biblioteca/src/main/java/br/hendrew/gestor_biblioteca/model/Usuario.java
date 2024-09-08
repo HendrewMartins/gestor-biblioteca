@@ -43,4 +43,8 @@ public class Usuario implements Serializable {
     @Column(name = "telefone")
     @Size(max = 11)
     private String telefone;
+
+    public Usuario(Integer id) {
+        this.id = id;
+    }
 }
