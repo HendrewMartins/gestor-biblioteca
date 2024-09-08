@@ -49,4 +49,8 @@ public class Livro implements Serializable {
     @Column(name = "categoria")
     @Enumerated(EnumType.ORDINAL)
     private CategoriaLivro categoria;
+
+    public Livro(Integer id) {
+        this.id = id;
+    }
 }

@@ -4,7 +4,6 @@ import br.hendrew.gestor_biblioteca.exception.NotFoundException;
 import br.hendrew.gestor_biblioteca.interfaces.Validatable;
 import br.hendrew.gestor_biblioteca.utils.DtoToEntityMapper;
 import br.hendrew.gestor_biblioteca.utils.EntityToDtoMapper;
-import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericFormResponse;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
