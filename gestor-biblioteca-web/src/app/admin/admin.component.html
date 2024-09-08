@@ -1,0 +1,35 @@
+<div class="main">
+    <mat-toolbar fxLayout="row" color="primary">
+        <button (click)="drawer.toggle()" class="menu-btn" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span fxFlex>Gestão de biblioteca</span>
+    </mat-toolbar>
+    <mat-drawer-container class="main-content">
+        <mat-drawer [opened]="true" mode="side" class="menu" #drawer>
+            <mat-nav-list>
+                <mat-list-item>
+                    <a matLine class="link" [routerLink]="['/admin/usuario']" routerLinkActive="link-activated">
+                        <mat-icon>format_list_numbered_rtl</mat-icon>
+                        <span>Usuário</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="link" [routerLink]="['/admin/livro']" routerLinkActive="link-activated">
+                        <mat-icon>description</mat-icon>
+                        <span>Livro</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                    <a matLine class="link" [routerLink]="['/admin/emprestimo']" routerLinkActive="link-activated">
+                        <mat-icon>verified</mat-icon>
+                        <span>Empréstimo</span>
+                    </a>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

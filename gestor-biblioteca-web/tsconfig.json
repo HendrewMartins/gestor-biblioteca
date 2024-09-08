@@ -21,7 +21,10 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "noImplicitAny": false,
+    "importsNotUsedAsValues": "remove",
+    "strictPropertyInitialization": false,
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
