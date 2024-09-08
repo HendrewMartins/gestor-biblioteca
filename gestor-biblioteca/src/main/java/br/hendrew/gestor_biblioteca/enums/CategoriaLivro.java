@@ -14,7 +14,8 @@ public enum CategoriaLivro implements Description {
     HISTORIA("História", "History"),
     AUTOAJUDA("Autoajuda", "Self-help"),
     MISTERIO("Mistério", "Mystery"),
-    TERROR("Terror", "Horror");
+    TERROR("Terror", "Horror"),
+    COMPUTADOR("Computador", "Computers");
 
     private final String description;
     private final String descriptionEn;

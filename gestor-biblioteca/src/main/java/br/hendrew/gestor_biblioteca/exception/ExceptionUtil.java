@@ -10,7 +10,7 @@ public class ExceptionUtil {
         if (e instanceof RestErrorException){
             return e.getMessage();
         }
-        String mensagem = "classe: " + e.getClass().toString();
+        String mensagem = "classe: " + e.getClass();
         if (e.getCause() != null){
             if (e.getCause().getCause() != null){
                 mensagem += "\ncausa: " + e.getCause().getCause().toString();
@@ -25,7 +25,7 @@ public class ExceptionUtil {
                     if (linha == 0){
                         mensagem += "\nLinha: ";
                     }
-                    mensagem += "\n*" + traceElement.toString();
+                    mensagem += "\n*" + traceElement;
                     linha++;
                     if (linha >= 5){
                         break;

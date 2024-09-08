@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/google-books")
-public class BookController {
+public class GoogleBookController {
 
     @Autowired
     GoogleBookService googleBookService;

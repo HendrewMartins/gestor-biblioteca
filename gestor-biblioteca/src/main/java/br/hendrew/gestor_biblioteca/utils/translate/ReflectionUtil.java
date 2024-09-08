@@ -105,8 +105,7 @@ public class ReflectionUtil {
                     field.set(destino, ((Time) valorCampo).toLocalTime());
                 } else if (valorCampo instanceof Timestamp) {
                     field.set(destino, ((Timestamp) valorCampo).toLocalDateTime());
-                } else if (valorCampo instanceof BigDecimal) {
-                    BigDecimal val = (BigDecimal) valorCampo;
+                } else if (valorCampo instanceof BigDecimal val) {
                     field.set(destino, val.scale() == 0 ? val.longValue() : val);
                 } else {
                     field.set(destino, valorCampo);

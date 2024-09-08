@@ -12,10 +12,10 @@ import java.util.List;
 
 public class QueryDto<E> {
 
-    private Class<E> dtoClass;
+    private final Class<E> dtoClass;
 
     @Getter
-    private NativeQuery query;
+    private final NativeQuery query;
 
     public QueryDto(String sql, EntityManager em, Class<E> dtoClass) {
         this.query = em.unwrap(Session.class).createNativeQuery(sql, Tuple.class);

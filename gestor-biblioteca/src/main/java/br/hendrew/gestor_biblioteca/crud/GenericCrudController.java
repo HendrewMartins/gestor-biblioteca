@@ -1,6 +1,6 @@
 package br.hendrew.gestor_biblioteca.crud;
 
-import br.hendrew.gestor_biblioteca.exception.TratamentoNotFoundException;
+import br.hendrew.gestor_biblioteca.exception.CustomNotFoundException;
 import br.hendrew.gestor_biblioteca.interfaces.Validatable;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D 
     }
 
     @GetMapping(path= "{id}")
-    public Object getById(@PathVariable(name = "id", required = true) Integer id) throws TratamentoNotFoundException  {
+    public Object getById(@PathVariable(name = "id", required = true) Integer id) throws CustomNotFoundException {
         return service.findDtoById(id);
     }
 
@@ -32,12 +32,12 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D 
     }
 
     @DeleteMapping(path = "{id}")
-    public GenericResponse deleteById(@PathVariable(name = "id", required = true) Integer id) throws TratamentoNotFoundException {
+    public GenericResponse deleteById(@PathVariable(name = "id", required = true) Integer id) throws CustomNotFoundException {
         return service.deleteById(id);
     }
 
     @PutMapping(path = "{id}")
-    public GenericResponse update(@PathVariable(name = "id", required = true) Integer id, @RequestBody @Valid D genericClass) throws TratamentoNotFoundException  {
+    public GenericResponse update(@PathVariable(name = "id", required = true) Integer id, @RequestBody @Valid D genericClass) throws CustomNotFoundException {
         return service.update(genericClass, id);
     }
 

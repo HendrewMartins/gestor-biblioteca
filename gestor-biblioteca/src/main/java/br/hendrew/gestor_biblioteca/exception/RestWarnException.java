@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public class RestWarnException extends RuntimeException {
-
-	private static final long serialVersionUID = 1L;
 	
 	@Getter
 	private int status = HttpStatus.BAD_REQUEST.value();
