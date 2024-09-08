@@ -1,0 +1,36 @@
+<form [formGroup]="form" #fr="ngForm">
+    <app-crud [form]="form" titulo="Bimestre" [api]="service">
+        <div class="form-group">
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome">
+                    <mat-error *ngIf="nome?.errors">{{ nome.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email">
+                    <mat-error *ngIf="email?.errors">{{ email.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="tel" formControlName="telefone">
+                    <mat-error *ngIf="telefone?.errors">{{ telefone.errors | erro }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="date" formControlName="dataCadastro">
+                    <mat-error *ngIf="dataCadastro?.errors">{{ dataCadastro.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </app-crud>
+</form>
