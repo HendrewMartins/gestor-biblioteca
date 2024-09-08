@@ -16,7 +16,7 @@ public class InfoBook {
     private String title;
     private List<String> authors;
     private String description;
-    private LocalDate publishedDate;
+    private String publishedDate;
     private List<IndustryIdentifier> industryIdentifiers;
     private int pageCount;
     private String printType;

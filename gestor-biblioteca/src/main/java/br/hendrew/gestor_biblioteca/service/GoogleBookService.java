@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class GoogleBookService {
@@ -29,7 +31,11 @@ public class GoogleBookService {
                         book.setAuthors(String.join(", ", item.getVolumeInfo().getAuthors()));
                     }
                     book.setDescription(item.getVolumeInfo().getDescription());
-                    book.setPublishedDate(item.getVolumeInfo().getPublishedDate());
+                    if(item.getVolumeInfo().getPublishedDate() != null && Objects.equals(item.getVolumeInfo().getPublishedDate().length(),10)) {
+                        book.setPublishedDate(LocalDate.parse(item.getVolumeInfo().getPublishedDate()));
+                    } else {
+                        book.setPublishedDate(LocalDate.now());
+                    }
                     if (item.getVolumeInfo().getCategories() != null && !item.getVolumeInfo().getCategories().isEmpty()) {
                         book.setCategory(item.getVolumeInfo().getCategories().get(0));
                     }
