@@ -34,7 +34,7 @@ public class QueryDto<E> {
     public E getSingleResult() throws Exception {
         TupleFactory<E> util = new TupleFactory<>();
         List<E> list = util.toDTO(this.query, this.dtoClass);
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);

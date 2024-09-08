@@ -24,9 +24,8 @@ import java.util.stream.Collectors;
 public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, EmprestimoRepository, EmprestimoDto> {
 
 
-
     public EmprestimoService() {
-        super(EmprestimoDto.class,Emprestimo.class);
+        super(EmprestimoDto.class, Emprestimo.class);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, E
 
     public List<LivroDto> recomendacao(Integer usuarioId) throws Exception {
         List<CategoriaLivro> categoriaLivros = this.buscarCategoriaEmprestimoUsuario(usuarioId);
-        if(categoriaLivros == null || categoriaLivros.isEmpty()) return new ArrayList<>();
+        if (categoriaLivros == null || categoriaLivros.isEmpty()) return new ArrayList<>();
         return this.buscarRecomendacao(categoriaLivros.stream().map(item -> item.ordinal()).collect(Collectors.toUnmodifiableList()), usuarioId);
     }
 
@@ -59,13 +58,13 @@ public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, E
                 "where emprestimo.livro_id = livro.livro_id and emprestimo.usuario_id = :usuarioId)";
 
         List<Livro> livros = this.getEntityManager().createNativeQuery(sql, Livro.class)
-                        .setParameter("categoria", categoria)
-                                .setParameter("usuarioId", usuarioId)
-                                        .getResultList();
+                .setParameter("categoria", categoria)
+                .setParameter("usuarioId", usuarioId)
+                .getResultList();
 
-        if(livros == null || livros.isEmpty()) new ArrayList<>();
+        if (livros == null || livros.isEmpty()) new ArrayList<>();
         List<LivroDto> livroDtos = new ArrayList<>();
-        for(Livro livro : livros) {
+        for (Livro livro : livros) {
             livroDtos.add(getEntityToDtoMapper().mapEntityToDto(livro, LivroDto.class));
         }
         return livroDtos;
@@ -79,7 +78,7 @@ public class EmprestimoService extends GenericCrudService<Emprestimo, Integer, E
         QueryDto<CategoriaDto> queryDto = new QueryDto<>(sql, getEntityManager(), CategoriaDto.class);
         queryDto.setParameter("usuarioId", usuarioId);
         List<CategoriaDto> categoriaDtos = queryDto.getResultList();
-        if(categoriaDtos == null  || categoriaDtos.isEmpty())
+        if (categoriaDtos == null || categoriaDtos.isEmpty())
             return new ArrayList<>();
         return categoriaDtos.stream().map(item -> item.getCategoria()).collect(Collectors.toUnmodifiableList());
     }

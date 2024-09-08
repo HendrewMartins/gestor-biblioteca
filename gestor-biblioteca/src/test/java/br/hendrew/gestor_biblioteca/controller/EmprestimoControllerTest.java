@@ -98,7 +98,7 @@ public class EmprestimoControllerTest {
     void testUpdateEmprestimo() throws Exception {
         EmprestimoDto emprestimoDto = getEmprestimoDto();
         emprestimoDto.setStatus(Status.BAIXADO);
-        emprestimoDto.setDataDevolucao(LocalDate.of(2024,9,8));
+        emprestimoDto.setDataDevolucao(LocalDate.of(2024, 9, 8));
         GenericResponse response = new GenericResponse("Registro(s) salvo(s) com sucesso.", HttpStatus.OK.value());
         when(emprestimoService.update(any(EmprestimoDto.class), anyInt())).thenReturn(response);
 

@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping(value = "/v1/emprestimo")
 public class EmprestimoController extends GenericCrudController<Emprestimo, EmprestimoService, EmprestimoDto> {
 
-    @GetMapping(path= "/recomendacao/{id}")
+    @GetMapping(path = "/recomendacao/{id}")
     public List<LivroDto> getRecomendacao(@PathVariable(name = "id", required = true) Integer usuarioId) throws Exception {
         return getService().recomendacao(usuarioId);
     }

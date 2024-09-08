@@ -30,15 +30,16 @@ public class LivroDto implements EntityDto {
     @NotNull
     private CategoriaLivro categoria;
 
-    public LivroDto(Integer id){
+    public LivroDto(Integer id) {
         this.id = id;
     }
 
-    public LivroDto(Integer id, String titulo){
+    public LivroDto(Integer id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
 
     @Override
-    public void validate() {}
+    public void validate() {
+    }
 }

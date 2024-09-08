@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>, D extends Validatable> {
+public abstract class GenericCrudService<T, ID, R extends JpaRepository<T, ID>, D extends Validatable> {
 
     @Getter
     @Autowired
@@ -56,7 +56,7 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
 
     private List<D> getListDto(List<T> list) {
         List<D> listDto = new ArrayList<>();
-        for(T item : list) {
+        for (T item : list) {
             listDto.add(getDto(item));
         }
         return listDto;

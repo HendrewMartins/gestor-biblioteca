@@ -31,7 +31,7 @@ public class GoogleBookService {
                         book.setAuthors(String.join(", ", item.getVolumeInfo().getAuthors()));
                     }
                     book.setDescription(item.getVolumeInfo().getDescription());
-                    if(item.getVolumeInfo().getPublishedDate() != null && Objects.equals(item.getVolumeInfo().getPublishedDate().length(),10)) {
+                    if (item.getVolumeInfo().getPublishedDate() != null && Objects.equals(item.getVolumeInfo().getPublishedDate().length(), 10)) {
                         book.setPublishedDate(LocalDate.parse(item.getVolumeInfo().getPublishedDate()));
                     } else {
                         book.setPublishedDate(LocalDate.now());

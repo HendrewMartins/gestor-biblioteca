@@ -1,7 +1,10 @@
 package br.hendrew.gestor_biblioteca.utils.generic_reponse;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

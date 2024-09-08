@@ -1,9 +1,5 @@
 package br.hendrew.gestor_biblioteca.controller;
 
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import br.hendrew.gestor_biblioteca.dtos.google_books.Book;
 import br.hendrew.gestor_biblioteca.service.GoogleBookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +12,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(GoogleBookController.class)
 public class GoogleBookControllerTest {

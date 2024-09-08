@@ -1,6 +1,6 @@
 package br.hendrew.gestor_biblioteca.service;
 
-import br.hendrew.gestor_biblioteca.dtos.google_books.*;
+import br.hendrew.gestor_biblioteca.dtos.google_books.Book;
 import br.hendrew.gestor_biblioteca.model.Livro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 class GoogleBookServiceTest {

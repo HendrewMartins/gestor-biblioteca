@@ -19,6 +19,7 @@ public enum CategoriaLivro implements Description {
 
     private final String description;
     private final String descriptionEn;
+
     CategoriaLivro(String description, String descriptionEn) {
         this.description = description;
         this.descriptionEn = descriptionEn;

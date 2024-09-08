@@ -11,6 +11,7 @@ public enum Status implements Description {
 
 
     private final String description;
+
     Status(String description) {
         this.description = description;
     }

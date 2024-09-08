@@ -3,7 +3,6 @@ package br.hendrew.gestor_biblioteca.cenarios;
 import br.hendrew.gestor_biblioteca.dtos.EmprestimoDto;
 import br.hendrew.gestor_biblioteca.dtos.LivroDto;
 import br.hendrew.gestor_biblioteca.dtos.UsuarioDto;
-import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
 import br.hendrew.gestor_biblioteca.enums.Status;
 import br.hendrew.gestor_biblioteca.model.Emprestimo;
 import br.hendrew.gestor_biblioteca.model.Livro;

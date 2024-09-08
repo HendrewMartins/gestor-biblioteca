@@ -21,13 +21,13 @@ public abstract class GenericCrudController<T, RS extends GenericCrudService, D 
         return service.findAll();
     }
 
-    @GetMapping(path= "{id}")
+    @GetMapping(path = "{id}")
     public Object getById(@PathVariable(name = "id", required = true) Integer id) throws CustomNotFoundException {
         return service.findDtoById(id);
     }
 
     @PostMapping
-    public GenericResponse save(@RequestBody @Valid D genericClass)  {
+    public GenericResponse save(@RequestBody @Valid D genericClass) {
         return service.save(genericClass);
     }
 
