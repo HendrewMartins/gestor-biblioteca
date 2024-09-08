@@ -2,9 +2,9 @@ spring:
   application:
     name: gestor-biblioteca
   datasource:
-    url: jdbc:postgresql://localhost:5433/gestorbiblioteca?ApplicationName=gestor_biblioteca&currentSchema=public
+    url: jdbc:postgresql://${DATABASE_API}?ApplicationName=gestor_biblioteca&currentSchema=public
     username: postgres
-    password: ${PASSWORD}
+    password: ${PASSWORD_API}
   jpa:
     generate-ddl: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
