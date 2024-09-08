@@ -1,6 +1,7 @@
 package br.hendrew.gestor_biblioteca.crud;
 
 import br.hendrew.gestor_biblioteca.exception.NotFoundException;
+import br.hendrew.gestor_biblioteca.interfaces.Validatable;
 import br.hendrew.gestor_biblioteca.utils.DtoToEntityMapper;
 import br.hendrew.gestor_biblioteca.utils.EntityToDtoMapper;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericFormResponse;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>, D> {
+public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>, D extends Validatable> {
 
     @Getter
     @Autowired
@@ -104,11 +105,13 @@ public abstract class GenericCrudService <T, ID, R extends JpaRepository<T, ID>,
     }
 
     public GenericResponse save(D genericClass) {
+        genericClass.validate();
         repository.saveAndFlush(getEntity(genericClass));
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }
 
     public GenericResponse update(D genericClass) {
+        genericClass.validate();
         repository.save(getEntity(genericClass));
         return GenericResponse.getGenericResponse(MESSAGE_SUCCESS, HttpStatus.OK.value());
     }

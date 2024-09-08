@@ -1,25 +1,33 @@
 package br.hendrew.gestor_biblioteca.dtos;
 
 import br.hendrew.gestor_biblioteca.enums.CategoriaLivro;
+import br.hendrew.gestor_biblioteca.interfaces.EntityDto;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LivroDto implements Serializable {
+public class LivroDto implements EntityDto {
 
     private Integer id;
+    @NotNull
     private String titulo;
+    @NotNull
     private String autor;
+    @NotNull
     private String isbn;
+    @NotNull
     private LocalDate dataPublicacao;
+    @NotNull
     private CategoriaLivro categoria;
 
+    @Override
+    public void validate() {}
 }

@@ -1,6 +1,7 @@
 package br.hendrew.gestor_biblioteca.crud;
 
 import br.hendrew.gestor_biblioteca.exception.TratamentoNotFoundException;
+import br.hendrew.gestor_biblioteca.interfaces.Validatable;
 import br.hendrew.gestor_biblioteca.utils.generic_reponse.GenericResponse;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class GenericCrudController<T, RS extends GenericCrudService, D> {
+public abstract class GenericCrudController<T, RS extends GenericCrudService, D extends Validatable> {
 
     @Getter
     @Autowired
