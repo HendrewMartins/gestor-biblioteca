@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatFormFieldModule,
         MatSelectModule,
         MatMenuModule,
+        MatTableModule,
+        MatDialogModule
     ],
     declarations: [
     ]

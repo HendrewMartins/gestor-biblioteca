@@ -5,4 +5,5 @@ export interface ColunaConfig {
     label: string;
     width?: string;
     tipo?: string;
+    colunaEntidade: string;
 }

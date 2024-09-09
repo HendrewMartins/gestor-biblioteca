@@ -1,0 +1,13 @@
+.card-actions {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 16px; 
+    flex-wrap: wrap;
+}
+
+.card-extra {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 16px; 
+    flex-wrap: wrap;
+}

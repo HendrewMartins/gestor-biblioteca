@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsuarioRoutingModule } from './livro-routing.module';
+import { LivroRoutingModule } from './livro-routing.module';
 import { LivroComponent } from './livro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
@@ -12,7 +12,7 @@ import { ErroModule } from '../../formulario/pipes/erro.module';
   declarations: [LivroComponent],
   imports: [
     CommonModule,
-    UsuarioRoutingModule,
+    LivroRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

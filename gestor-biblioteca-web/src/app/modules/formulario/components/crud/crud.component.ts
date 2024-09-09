@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -27,6 +27,8 @@ export class CrudComponent implements OnInit, OnDestroy {
 
     @Input() public api: Api<any>;
 
+    @Output() public onRegistro = new EventEmitter<any>();
+
     public registroId: number = 0;
 
     private subscription!: Subscription;
@@ -51,11 +53,12 @@ export class CrudComponent implements OnInit, OnDestroy {
             this.registroId = id;
             this.api.ler(id).subscribe((registro) => {
                 if (registro) {
+                    this.onRegistro.emit(registro);
                     this.form.patchValue(registro);
                 }
             }, error => {
                 console.error(error);
-                alert('Não foi possível encontrar o registro ' + id);
+                alert('Não foi possível encontrar o registro ' + id + ' ' + (error?.error?.message ? error.error.message : ''));
                 this.abrirNovoRegistro();
             });
         }
@@ -81,7 +84,7 @@ export class CrudComponent implements OnInit, OnDestroy {
             }
         }, error => {
             console.error(error);
-            alert('Erro ao alterar o registro');
+            alert('Erro ao alterar o registro: '+ (error?.error?.message ? error.error.message : ''));
         });
     }
 
@@ -91,8 +94,8 @@ export class CrudComponent implements OnInit, OnDestroy {
             this.limpar();
 
         }, error => {
-            console.error(error);
-            alert('Ocorreu um erro ao salvar o registro registro');
+            console.error(error.error.message);
+            alert('Ocorreu um erro ao salvar o registro registro: ' + (error?.error?.message ? error.error.message : ''));
         });
     }
 
@@ -114,7 +117,7 @@ export class CrudComponent implements OnInit, OnDestroy {
             this.limpar();
         }, error => {
             console.error(error);
-            alert('Ocorreu uma falha ao deletar o registro');
+            alert('Ocorreu uma falha ao deletar o registro: '+ (error?.error?.message ? error.error.message : ''));
         });
     }
 

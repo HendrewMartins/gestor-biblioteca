@@ -6,25 +6,30 @@ export const PESQUISA_USUARIO_CONFIG: PesquisaConfig = {
     colunas: [
         {
             label: 'Código',
-            nome: 'id'
+            nome: 'id',
+            colunaEntidade:''
         },
         {
             label: 'Nome',
-            nome: 'nome'
+            nome: 'nome',
+            colunaEntidade:''
         },
         {
             label: 'Email',
-            nome: 'email'
+            nome: 'email',
+            colunaEntidade:''
         },
         {
             label: 'Data de Cadastro',
             nome: 'dataCadastro',
-            tipo: 'DATA'
+            tipo: 'DATA',
+            colunaEntidade:''
         },
         {
             label: 'Telefone',
             nome: 'telefone',
-            tipo: 'TELEFONE'
+            tipo: 'TELEFONE',
+            colunaEntidade:''
         },
     ],
     pathApi: 'v1/usuario'

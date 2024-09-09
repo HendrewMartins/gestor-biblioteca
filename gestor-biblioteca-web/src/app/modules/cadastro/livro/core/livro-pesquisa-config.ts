@@ -5,29 +5,35 @@ export const PESQUISA_LIVRO_CONFIG: PesquisaConfig = {
     colunas: [
         {
             label: 'Código',
-            nome: 'id'
+            nome: 'id',
+            colunaEntidade:''
         },
         {
             label: 'Título',
-            nome: 'titulo'
+            nome: 'titulo',
+            colunaEntidade:''
         },
         {
             label: 'Autor',
-            nome: 'autor'
+            nome: 'autor',
+            colunaEntidade:''
         },
         {
             label: 'ISBN',
             nome: 'isbn',
+            colunaEntidade:''
         },
         {
             label: 'Publicação',
             nome: 'dataPublicacao',
-            tipo: 'DATA'
+            tipo: 'DATA',
+            colunaEntidade:''
         },
         {
             label: 'Categoria',
             nome: 'categoria',
-            tipo: 'CATEGORIA'
+            tipo: 'CATEGORIA',
+            colunaEntidade:''
         },
     ],
     pathApi: 'v1/livro'
