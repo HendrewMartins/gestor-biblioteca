@@ -1,13 +1,43 @@
 
-# Biblioteca API
+# Projeto de Biblioteca
 
-Este projeto é uma API de gerenciamento de biblioteca, desenvolvida em **Java 21** utilizando **Spring Boot**, **Hibernate**, **JPA**, **Swagger**, **Postgres** e testes com **JUnit** e **H2**. A aplicação permite o cadastro de usuários, livros, empréstimos e integração com a API do **Google Books** para busca e inserção de livros no sistema.
+Este projeto é uma API de gerenciamento de biblioteca, desenvolvida em **Java 21** utilizando **Spring Boot**, **Hibernate**, **JPA**, **Swagger**, **Postgres** e testes com **JUnit** e **H2**. A aplicação permite o cadastro de usuários, livros, empréstimos e integração com a API do **Google Books** para busca e inserção de livros no sistema. O projeto também inclui uma aplicação web em Angular 18 que utiliza Angular Material.
 
-## Requisitos
+## Funcionalidades
+
+### API
+
+A API realiza as seguintes operações:
+
+- Cadastro de usuário
+- Cadastro de livro
+- Geração de empréstimos
+- Consulta na API do Google Books com inserção no sistema
+- Endpoint de recomendação que retorna uma lista de livros recomendados
+
+### Frontend
+
+A aplicação web em Angular 18 inclui:
+
+- Tabelas utilizando Angular Material
+- Integração com a API do backend
+- Ajustes no environment para apontar para a URL do serviço
+
+## Estrutura do Projeto
+
+### Backend
 
 - **Java 21**
+- **Spring Boot**
+- **Hibernate**
+- **JPA**
 - **PostgreSQL**
-- **Maven** (para gerenciamento de dependências)
+- **Testes com JUnit e H2**
+
+### Frontend
+
+- **Angular 18**
+- **Angular Material**
 
 ## Configuração
 
@@ -31,6 +61,31 @@ spring:
       ddl-auto: update
     show-sql: true
 ```
+
+### Configuração do Frontend
+
+Para rodar a aplicação Angular, você deve ajustar o arquivo de environment do projeto apontando para a URL do serviço:
+
+```typescript
+// environment.ts
+export const environment = {
+  production: false,
+  apiUrl: 'URL_DO_SERVIÇO_AQUI'
+};
+```
+
+```cmd
+git clone [URL_DO_REPOSITORIO](https://github.com/HendrewMartins/gestor-biblioteca.git)
+cd gestor-biblioteca-api
+./mvnw spring-boot:run
+```
+Acesse a API em http://localhost:8080.
+```cmd
+cd gestor-biblioteca-web
+npm install
+ng serve
+```
+Acesse a aplicação web em http://localhost:4200.
 
 ## Funcionalidades
 
