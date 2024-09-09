@@ -21,7 +21,7 @@ public class ExceptionUtil {
         if (e.getStackTrace() != null) {
             int linha = 0;
             for (StackTraceElement traceElement : e.getStackTrace()) {
-                if (traceElement != null && (linha > 0 || traceElement.toString().startsWith("br.inf.ids"))) {
+                if (traceElement != null && (linha > 0 || traceElement.toString().startsWith("br.hendrew"))) {
                     if (linha == 0) {
                         mensagem += "\nLinha: ";
                     }

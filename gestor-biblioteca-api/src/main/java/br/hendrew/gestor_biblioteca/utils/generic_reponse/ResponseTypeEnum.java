@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum GenericResponseTypeEnum {
+public enum ResponseTypeEnum {
 
     ERROR("Erro"),
     VALIDATION("Validação");

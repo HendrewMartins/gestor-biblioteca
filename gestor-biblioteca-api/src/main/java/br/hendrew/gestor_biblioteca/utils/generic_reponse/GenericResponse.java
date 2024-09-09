@@ -13,7 +13,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GenericResponse {
 
-    private GenericResponseTypeEnum type;
+    private ResponseTypeEnum type;
     private String errorId;
     private String message;
     private String error;
