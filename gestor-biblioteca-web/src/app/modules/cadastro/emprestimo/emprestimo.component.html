@@ -1,0 +1,52 @@
+<form [formGroup]="form" #fr="ngForm">
+    <app-crud [form]="form" titulo="Bimestre" [api]="service" (onRegistro)="carregouRegistro($event)">
+        <div class="form-group">
+            <div class="form-row">
+                <mat-form-field class="form-field" [appearance]="'outline'">
+                    <mat-label>Usuário</mat-label>
+                    <mat-select formControlName="usuario" [compareWith]="compare">
+                        <mat-option [value]="item" *ngFor="let item of listaUsuario">{{item.nome}}</mat-option>
+                    </mat-select>
+                    <mat-error>{{usuario.errors | erro}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+                <mat-form-field class="form-field" [appearance]="'outline'">
+                    <mat-label>Livro</mat-label>
+                    <mat-select formControlName="livro" [compareWith]="compare">
+                        <mat-option [value]="item" *ngFor="let item of listaLivro">{{item.titulo}}</mat-option>
+                    </mat-select>
+                    <mat-error>{{livro.errors | erro}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-row">
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Data emprestimo</mat-label>
+                    <input matInput type="date" formControlName="dataEmprestimo">
+                    <mat-error *ngIf="dataEmprestimo?.errors">{{ dataEmprestimo.errors | erro }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Data devolução</mat-label>
+                    <input matInput type="date" formControlName="dataDevolucao">
+                    <mat-error *ngIf="dataDevolucao?.errors">{{ dataDevolucao.errors | erro }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option *ngFor="let status of statusLabel" [value]="status.value">
+                            {{ status.label }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="status.invalid">{{ status.errors | erro }}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <button *ngIf="usuarioSelecionado" extra-button type="button" (click)="buscarRecomendacao()" color="primary"
+            mat-raised-button>Recomendações</button>
+    </app-crud>
+</form>
