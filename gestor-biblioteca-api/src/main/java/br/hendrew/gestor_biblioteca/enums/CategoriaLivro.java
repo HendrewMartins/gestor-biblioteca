@@ -15,7 +15,9 @@ public enum CategoriaLivro implements Description {
     AUTOAJUDA("Autoajuda", "Self-help"),
     MISTERIO("Mistério", "Mystery"),
     TERROR("Terror", "Horror"),
-    COMPUTADOR("Computador", "Computers");
+    COMPUTADOR("Computador", "Computers"),
+    EDUCACAO("Educação","Education"),
+    OUTRAS("Outras", "Outher");
 
     private final String description;
     private final String descriptionEn;
@@ -31,6 +33,6 @@ public enum CategoriaLivro implements Description {
                 return categoria;
             }
         }
-        throw new IllegalArgumentException("Categoria não encontrada para: " + descricaoEn);
+        return OUTRAS;
     }
 }

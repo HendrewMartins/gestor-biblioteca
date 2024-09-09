@@ -1,14 +1,11 @@
-<div class="search-container" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="input-container">
-      <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Descrição</mat-label>
-          <input matInput [formControl]="searchControl" placeholder="Digite o título do livro" #input>
-      </mat-form-field>
-  </div>
-  <div class="button-container">
-      <button mat-raised-button color="primary" (click)="onSearch()">Pesquisar</button>
-  </div>
+<div class="search-container" fxLayout="row" fxLayoutAlign="center center">
+  <mat-form-field appearance="outline" class="full-width search-input">
+    <mat-label>Descrição</mat-label>
+    <input matInput [formControl]="searchControl" placeholder="Digite o título do livro">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSearch()" class="search-button">Pesquisar</button>
 </div>
+
 
 
 <mat-table [dataSource]="books" class="mat-elevation-z8">

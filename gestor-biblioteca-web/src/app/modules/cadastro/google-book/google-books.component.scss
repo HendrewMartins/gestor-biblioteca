@@ -4,12 +4,13 @@
     border-radius: 4px; 
 }
 
-.input-container {
-    flex: 1;
-    margin-right: 16px; 
+.search-input {
+    flex: 1; 
+    margin-right: 16px;
+    width: 40%;
 }
 
-.button-container {
-    display: flex;
-    align-items: center; 
+.search-button {
+    justify-content: flex-end; 
+    align-self: center; 
 }
