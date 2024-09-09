@@ -9,7 +9,9 @@ export enum CategoriaLivro {
     AUTOAJUDA = "Autoajuda",
     MISTERIO = "Mistério",
     TERROR = "Terror",
-    COMPUTADOR = "Computador"
+    COMPUTADOR = "Computador",
+    EDUCACAO = "Educação",
+    OUTRAS = "Outras"
 }
 
 export interface LabelValue {
@@ -28,5 +30,7 @@ export const CategoriaLivroLabelValue = [
     { label: 'Autoajuda', value: 'AUTOAJUDA' },
     { label: 'Mistério', value: 'MISTERIO' },
     { label: 'Terror', value: 'TERROR' },
-    { label: 'Computador', value: 'COMPUTADOR' }
+    { label: 'Computador', value: 'COMPUTADOR' },
+    { label: 'Educação', value: 'EDUCACAO' },
+    { label: 'Outras', value: 'OUTRAS' }
   ];
