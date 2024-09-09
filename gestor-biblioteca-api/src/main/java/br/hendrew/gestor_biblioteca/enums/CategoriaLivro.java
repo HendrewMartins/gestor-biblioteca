@@ -33,6 +33,6 @@ public enum CategoriaLivro implements Description {
                 return categoria;
             }
         }
-        return OUTRAS;
+        return CategoriaLivro.OUTRAS;
     }
 }
