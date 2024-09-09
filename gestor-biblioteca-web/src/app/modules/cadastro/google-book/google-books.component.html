@@ -1,0 +1,52 @@
+<div class="search-container" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="input-container">
+      <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descrição</mat-label>
+          <input matInput [formControl]="searchControl" placeholder="Digite o título do livro" #input>
+      </mat-form-field>
+  </div>
+  <div class="button-container">
+      <button mat-raised-button color="primary" (click)="onSearch()">Pesquisar</button>
+  </div>
+</div>
+
+
+<mat-table [dataSource]="books" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let book"> {{ book.title }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="authors">
+    <mat-header-cell *matHeaderCellDef> Authors </mat-header-cell>
+    <mat-cell *matCellDef="let book"> {{ book.authors }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="publishedDate">
+    <mat-header-cell *matHeaderCellDef> Published Date </mat-header-cell>
+    <mat-cell *matCellDef="let book"> {{ book.publishedDate | date: 'dd/MM/yyyy' }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+    <mat-cell *matCellDef="let book"> {{ book.category }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isbn">
+    <mat-header-cell *matHeaderCellDef> ISBN </mat-header-cell>
+    <mat-cell *matCellDef="let book"> {{ book.isbn }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+    <mat-cell *matCellDef="let book">
+      <button mat-raised-button color="primary" (click)="onSelectBook(book)">
+        Incluir livro
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
