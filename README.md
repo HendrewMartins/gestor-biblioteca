@@ -67,7 +67,6 @@ spring:
 Para rodar a aplicação Angular, você deve ajustar o arquivo de environment do projeto apontando para a URL do serviço:
 
 ```typescript
-// environment.ts
 export const environment = {
   production: false,
   apiUrl: 'URL_DO_SERVIÇO_AQUI'
