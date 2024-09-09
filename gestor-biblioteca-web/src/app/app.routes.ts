@@ -10,6 +10,7 @@ export const routes: Routes = [
             { path: 'usuario', loadChildren: () => import('./modules/cadastro/usuario/usuario.module').then(m => m.UsuarioModule) },
             { path: 'livro', loadChildren: () => import('./modules/cadastro/livro/livro.module').then(m => m.LivroModule) },
             { path: 'emprestimo', loadChildren: () => import('./modules/cadastro/emprestimo/emprestimo.module').then(m => m.EmprestimoModule) },
+            { path: 'google', loadChildren: () => import('./modules/cadastro/google-book/google-books.module').then(m => m.GoogleBookModule) },
         ]
     }
 ];

@@ -57,7 +57,6 @@ export class CrudComponent implements OnInit, OnDestroy {
                     this.form.patchValue(registro);
                 }
             }, error => {
-                console.error(error);
                 alert('Não foi possível encontrar o registro ' + id + ' ' + (error?.error?.message ? error.error.message : ''));
                 this.abrirNovoRegistro();
             });
@@ -83,18 +82,16 @@ export class CrudComponent implements OnInit, OnDestroy {
                 alert(`Registro foi salvo com sucesso`);
             }
         }, error => {
-            console.error(error);
             alert('Erro ao alterar o registro: '+ (error?.error?.message ? error.error.message : ''));
         });
     }
 
     private criar() {
         this.api.criar(this.form.value).subscribe((registro) => {
-            alert(`O registro com código foi salvo com sucesso!`);
+            alert(`O registro foi salvo com sucesso!`);
             this.limpar();
 
         }, error => {
-            console.error(error.error.message);
             alert('Ocorreu um erro ao salvar o registro registro: ' + (error?.error?.message ? error.error.message : ''));
         });
     }
@@ -116,7 +113,6 @@ export class CrudComponent implements OnInit, OnDestroy {
             alert('Registro deletado com sucesso!');
             this.limpar();
         }, error => {
-            console.error(error);
             alert('Ocorreu uma falha ao deletar o registro: '+ (error?.error?.message ? error.error.message : ''));
         });
     }

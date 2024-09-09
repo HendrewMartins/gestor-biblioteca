@@ -39,11 +39,12 @@ public class GoogleBookService {
                     if (item.getVolumeInfo().getCategories() != null && !item.getVolumeInfo().getCategories().isEmpty()) {
                         book.setCategory(item.getVolumeInfo().getCategories().get(0));
                     }
-
-                    item.getVolumeInfo().getIndustryIdentifiers().stream()
-                            .filter(identifier -> "ISBN_13".equals(identifier.getType()))
-                            .findFirst()
-                            .ifPresent(identifier -> book.setIsbn(identifier.getIdentifier()));
+                    if (item.getVolumeInfo().getIndustryIdentifiers() != null && !item.getVolumeInfo().getIndustryIdentifiers().isEmpty()) {
+                        item.getVolumeInfo().getIndustryIdentifiers().stream()
+                                .filter(identifier -> "ISBN_13".equals(identifier.getType()))
+                                .findFirst()
+                                .ifPresent(identifier -> book.setIsbn(identifier.getIdentifier()));
+                    }
 
                     return book;
                 })

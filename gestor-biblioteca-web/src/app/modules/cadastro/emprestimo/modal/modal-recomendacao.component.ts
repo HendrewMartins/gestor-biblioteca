@@ -23,7 +23,6 @@ export class LivrosDialogComponent implements OnInit, OnChanges {
     this.dataSource = new MatTableDataSource(livros);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.dataSource);
   }
   ngOnInit(): void {
 

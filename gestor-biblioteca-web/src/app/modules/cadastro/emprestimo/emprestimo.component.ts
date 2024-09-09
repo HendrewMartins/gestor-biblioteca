@@ -102,8 +102,13 @@ export class EmprestimoComponent implements OnInit {
 
     public buscarRecomendacao() {
         const usuarioId = this.usuario.value?.id;
-        if(!usuarioId) return;
-        this.service.buscarRecomendacao(usuarioId).subscribe(item => this.abrirDialogLivros(item));
+        if (!usuarioId) return;
+        this.service.buscarRecomendacao(usuarioId).subscribe(
+            item => {
+                this.abrirDialogLivros(item)
+            }, error => {
+                alert('Ocorreu um erro ao buscar registro: ' + (error?.error?.message ? error.error.message : ''));
+            });
     }
 
     compare(o1: any, o2: any): boolean {
@@ -117,7 +122,7 @@ export class EmprestimoComponent implements OnInit {
             data: listaDeLivros
         });
         dialogRef.componentInstance.onLivroSelecionado.subscribe((livro: Livro) => {
-           this.livro.setValue(livro);
+            this.livro.setValue(livro);
         });
     }
 
